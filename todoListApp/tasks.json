@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "Title": "Create new Tasks",
+    "Description": " Create tasks and add them to a list, have those marked complete or incomplete and give priority",
+    "DueDate": "26/09",
+    "Priority": "Medium",
+    "IsCompleted": false
+  },
+  {
+    "Id": 2,
+    "Title": "Test Console App",
+    "Description": "Test the app by making sure tasks can be marked as done, saved and retrived",
+    "DueDate": "26/09",
+    "Priority": "High",
+    "IsCompleted": false
+  },
+  {
+    "Id": 3,
+    "Title": "Pet cat",
+    "Description": "cuddle the cat hampering you",
+    "DueDate": "21/09",
+    "Priority": "High",
+    "IsCompleted": true
+  }
+]

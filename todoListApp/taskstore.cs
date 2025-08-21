@@ -1,37 +1,77 @@
 using ToDoList;
+using System.Linq;
+using System.Text.Json;
+using System.IO;
+
+namespace TaskActions;
 
 public class TaskStore
 {
-    public List<TaskItem> TaskList { get; set; }
+    private readonly string _filePath = "tasks.json";
+    public List<TaskItem> Tasks { get; set; } 
 
     public TaskStore()
     {
-        TaskList = new List<TaskItem>();
+        Tasks = new List<TaskItem>(); 
+        LoadTasks();
     }
 
     public void AddTask(string title, string description, string dueDate, string priority)
     {
         var task = new TaskItem(title, description, dueDate, priority);
-        TaskList.Add(task);
+        Tasks.Add(task); 
+        SaveTasks();
     }
 
     public List<TaskItem> GetCompletedTasks()
     {
-        return TaskList.Where(t => t.IsCompleted).ToList();
+        return Tasks.Where(t => t.IsCompleted).ToList();
     }
 
     public List<TaskItem> GetIncompleteTasks()
     {
-        return TaskList.Where(t => !t.IsCompleted).ToList();
+        return Tasks.Where(t => !t.IsCompleted).ToList();
     }
 
-    public void MarkTaskComplete(string title)
+    public bool MarkTaskComplete(string title)
     {
-        var task = TaskList.FirstOrDefault(t => t.Title == title);
+        TaskItem? task = Tasks.FirstOrDefault(t => t.Title == title);
         if (task != null)
         {
             task.IsCompleted = true;
+            SaveTasks();
+            return true;
+        }
+        return false;
+    }
+
+    public void SaveTasks()
+    {
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        string jsonString = JsonSerializer.Serialize(Tasks, options);
+        File.WriteAllText(_filePath, jsonString);
+    }
+
+    private void LoadTasks()
+    {
+        if (File.Exists(_filePath))
+        {
+            string jsonString = File.ReadAllText(_filePath);
+            Tasks = JsonSerializer.Deserialize<List<TaskItem>>(jsonString) ?? new List<TaskItem>();
+
+            // Find the highest existing Id
+            int highestId = 0;
+            foreach (var task in Tasks)
+            {
+                if (task.Id > highestId)
+                    highestId = task.Id;
+            }
+
+            TaskItem.SetNextId(highestId + 1);
+        }
+        else
+        {
+            Tasks = new List<TaskItem>();
         }
     }
 }
-

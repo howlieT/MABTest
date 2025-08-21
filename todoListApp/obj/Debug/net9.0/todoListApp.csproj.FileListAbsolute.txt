@@ -26,3 +26,4 @@
 /Users/Misha/Documents/Code/MAB/MABTest/todoListApp/obj/Debug/net9.0/todoListApp.pdb
 /Users/Misha/Documents/Code/MAB/MABTest/todoListApp/obj/Debug/net9.0/todoListApp.genruntimeconfig.cache
 /Users/Misha/Documents/Code/MAB/MABTest/todoListApp/obj/Debug/net9.0/ref/todoListApp.dll
+/Users/Misha/Documents/Code/MAB/MABTest/todoListApp/bin/Debug/net9.0/tasks.json
