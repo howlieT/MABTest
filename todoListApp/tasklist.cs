@@ -1,6 +1,3 @@
-using system;
-using system.collections.generic;
-using system.linq;
 
 namespace ToDoList;
 
