@@ -25,16 +25,16 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Console.Write("Title: ");
+                    Console.WriteLine("Title: ");
                     string title = Console.ReadLine() ?? "";
 
-                    Console.Write("Description: ");
+                    Console.WriteLine("Description: ");
                     string desc = Console.ReadLine() ?? "";
 
-                    Console.Write("Due Date: ");
+                    Console.WriteLine("Due Date: ");
                     string due = Console.ReadLine() ?? "";
 
-                    Console.Write("Priority: ");
+                    Console.WriteLine("Priority: ");
                     string priority = Console.ReadLine() ?? "";
 
                     store.AddTask(title, desc, due, priority);
@@ -56,15 +56,12 @@ public class Program
                     {
                         Console.WriteLine($"[{(task.IsCompleted ? "X" : " ")}] {task.Title} (Due: {task.DueDate}, Priority: {task.Priority})");
                     }
-                    
+                    else
+                    {
+                        Console.WriteLine("No completed tasks found.");
+                    }
                     break;
-                case "5":
-                    Console.Write("Enter the title of the task to mark as complete: "); 
-                    string taskTitle = Console.ReadLine() ?? "";
-                    store.MarkTaskComplete(taskTitle);  
-                    Console.WriteLine("Task marked as complete!");
-                    break;
-                    
+                
                 case "4":
                     Console.WriteLine("\n--- Incomplete Tasks ---");    
                     foreach (var task in store.TaskList)
@@ -72,7 +69,19 @@ public class Program
                     {
                         Console.WriteLine($"[{(!task.IsCompleted ? "X" : " ")}] {task.Title} (Due: {task.DueDate}, Priority: {task.Priority})");
                     }
+                    else
+                    {
+                        Console.WriteLine("No incomplete tasks found.");
+                    }
                     break;
+    
+                 case "5":
+                    Console.WriteLine("Enter the title of the task to mark as complete: "); 
+                    string taskTitle = Console.ReadLine() ?? "";
+                    store.MarkTaskComplete(taskTitle);  
+                    Console.WriteLine("Task marked as complete!");
+                    break;
+
                 case "6":
                     running = false;
                     break;
